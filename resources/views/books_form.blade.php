@@ -15,12 +15,8 @@
 
     <div class="card-body">
 
-        <form
-            action="{{ isset($book)
-                ? route('books.update', $book->id)
-                : route('books.store') }}"
-            method="POST">
-
+        <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
+   
             @csrf
 
             <div class="mb-3">
@@ -32,15 +28,13 @@
                     value="{{ $book->title ?? '' }}">
             </div>
 
-            <div class="mb-3">
-                <label>Author</label>
-                <input
-                    type="text"
-                    name="author"
-                    class="form-control"
-                    value="{{ $book->author ?? '' }}">
-            </div>
-
+           <div class="mb-3">
+    <label for="author" class="form-label">Author</label>
+    <select name="author" id="author" class="form-select" required>
+        <option value="">-- Select an Author --</option>
+        
+    </select>
+</div>
             <div class="mb-3">
                 <label>Genre</label>
                 <input
@@ -58,7 +52,10 @@
                     class="form-control"
                     value="{{ $book->publication ?? '' }}">
             </div>
-
+<div class="mb-3">
+        <label class="form-label">Book Cover Image</label>
+        <input type="file" name="cover_image" class="form-control">
+    </div>
             <button
                 type="submit"
                 class="btn btn-primary">

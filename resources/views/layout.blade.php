@@ -80,6 +80,11 @@
                     <div class="card-body pt-3">
                         <ul class="nav nav-link-secondary flex-column fw-bold gap-2 sidebar-menu ">
 
+                               <li class="nav-item">
+                                <a class="nav-link {{ request()->is('dashboards') ? 'active' : '' }}" href="/dashboards">
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="/dashboard">
                                     <span>User</span>
@@ -89,6 +94,11 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->is('movies') ? 'active' : '' }}" href="/movies">
                                     <span>Movies</span>
+                                </a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link {{ request()->is('author') ? 'active' : '' }}" href="/author">
+                                    <span>Author</span>
                                 </a>
                             </li>
                             <li class="nav-item">

@@ -30,6 +30,7 @@ Total Books: {{ $books->total() }}
                     <thead class="table-dark">
                         <tr>
                             <th>ID</th>
+                            <th>Cover</th>
                             <th>Title</th>
                             <th>Author</th>
                             <th>Genre</th>
@@ -42,7 +43,16 @@ Total Books: {{ $books->total() }}
                         @foreach($books as $book)
                         <tr>
                             <td>{{ $book->id }}</td>
-                            <td>{{ $book->title }}</td>
+<td>
+    @if($book->cover_image)
+        <img src="{{ asset($book->cover_image) }}" 
+             alt="Book Cover" 
+             style="width: 100px; height: 100px; object-fit: cover;" 
+             class="img-thumbnail">
+    @else
+        <span class="text-muted small">No Cover</span>
+    @endif
+</td>                            <td>{{ $book->title }}</td>
                             <td>{{ $book->author }}</td>
                             <td>{{ $book->genre }}</td>
                             <td>{{ $book->publication }}</td>

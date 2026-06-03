@@ -2,7 +2,8 @@
 use App\Http\Controllers\ProfileController;
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\DashboardController;
 Route::get('/dashboard', function () {
 
     if (!session()->has('user_id')) {
@@ -24,8 +25,11 @@ Route::get('/books', function () {
     return view('books');
     
 })->name('books');
-
-Route::get('/myprofile', function () {
+Route::get('/author', function () {
+    return view('author');
+    
+})->name('author');
+Route::get('/authors/create', [AuthorController::class, 'create'])->name('authors.create');Route::get('/myprofile', function () {
 
     if (!session()->has('user_id')) {
         return redirect()->route('Login');
@@ -89,3 +93,27 @@ Route::post('/logout', function () {
 Route::get('/myprofile', [ProfileController::class, 'index'])->name('profile');
 Route::post('/myprofile/update', [ProfileController::class, 'update'])->name('profile.update');
 Route::post('/register', [AuthController::class, 'register']);
+
+
+
+
+// Explicit routes matching the specific 'author' view naming structure
+Route::get('/author', [AuthorController::class, 'index'])->name('authors.index');// List authors
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
+
+// Create form view
+Route::get('/authors/create', [AuthorController::class, 'create'])->name('authors.create');
+
+// SAVE NEW AUTHOR (This is the missing route!)
+Route::post('/authors', [AuthorController::class, 'store'])->name('authors.store');
+
+// Edit form view
+Route::get('/authors/{id}/edit', [AuthorController::class, 'edit'])->name('authors.edit');
+
+// UPDATE EXISTING AUTHOR
+Route::put('/authors/{id}', [AuthorController::class, 'update'])->name('authors.update');
+
+// Delete author
+Route::delete('/authors/{id}', [AuthorController::class, 'destroy'])->name('authors.destroy');
+
+Route::get('/dashboards', [DashboardController::class, 'index'])->name('dashboards');
