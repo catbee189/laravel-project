@@ -4,25 +4,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Book;
-
+use App\Models\Author;
 class BooksController extends Controller
 {
     public function index()
     {
-        $books = Book::paginate(10);
+        $books = Book::with('author')->paginate(4);
 
         return view('books', compact('books'));
     }
 
 public function create()
 {
+    $authors = Author::orderBy('name', 'asc')->get();
+        
+        // 3. Pass the $authors variable down into the view
+        return view('books_form', compact('authors'));
 return view('books_form');
 }
 public function store(Request $request)
 {
     $request->validate([
         'title' => 'required',
-        'author' => 'required',
+        'author_id' => 'required',
         'genre' => 'required',
         'publication' => 'required',
         'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB file
@@ -44,7 +48,7 @@ if ($request->hasFile('cover_image')) {
 
 Book::create([
     'title'       => $request->title,
-    'author'      => $request->author,
+    'author_id'      => $request->author_id,
     'genre'       => $request->genre,
     'publication' => $request->publication,
     'cover_image' => $imagePath, // Stores: "fbooks/1717414628_665db12345.jpg"

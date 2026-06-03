@@ -53,7 +53,7 @@ Total Books: {{ $books->total() }}
         <span class="text-muted small">No Cover</span>
     @endif
 </td>                            <td>{{ $book->title }}</td>
-                            <td>{{ $book->author }}</td>
+                            <td>{{ $book->author->name }}</td>
                             <td>{{ $book->genre }}</td>
                             <td>{{ $book->publication }}</td>
                               <td>
