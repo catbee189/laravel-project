@@ -18,5 +18,6 @@ class Profile extends Model
         'username',
         'contact_number',
         'address',
+        'password',
     ];
 }
